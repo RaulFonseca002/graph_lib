@@ -1,5 +1,5 @@
-#ifndef EDGES_H
-#define EDGES_H
+#ifndef EDGES_HPP
+#define EDGES_HPP
 
 #include <string>
 #include <map>

@@ -1,4 +1,4 @@
-#include "graph.h"
+#include "graph.hpp"
 using namespace std;
 
 struct pathingNode {
@@ -72,7 +72,51 @@ string Graph::dijkstra(string from, string to) {
         node = nodesHeap.front();
         nodesHeap.erase(nodesHeap.begin());
 
+        if(node.weight == HUGE_VAL) {
+            return "no path from " + from + " to " + to;
+        }
     }
 
     return getPath(from, to);
+}
+
+string Graph::dijkstra(vector<string> from, vector<string> to){
+
+    string resp;
+
+    addNode("startingNode");
+    addNode("terminalNode");
+
+    for(int c = 0; c < from.size(); c++){
+        addEdge("startingNode", from[c], 1);
+    }
+
+    for(int c = 0; c < to.size(); c++){
+        addEdge(to[c], "terminalNode", 1);
+    }
+
+    resp = dijkstra("startingNode", "terminalNode");
+
+    removeNode("startingNode");
+    removeNode("terminalNode");
+
+
+    resp = resp.substr(strlen("startingNode->"), (resp.length() - (strlen("->terminalNode") + strlen("startingNode->"))));
+    return resp;
+}
+
+string Graph::dijkstra(vector<string> from, string to){
+
+    vector<string> t;
+    t.push_back(to);
+
+    return dijkstra(from, t);
+}
+
+string Graph::dijkstra(string from, vector<string> to){
+
+    vector<string> s;
+    s.push_back(from);
+
+    return dijkstra(s, to);
 }

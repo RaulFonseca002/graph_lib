@@ -1,13 +1,13 @@
-#ifndef GRAPH_H
-#define GRAPH_H
+#ifndef GRAPH_HPP
+#define GRAPH_HPP
 
 #include <iostream>
 #include <queue>
 #include <fstream>
 #include <regex>
 #include <cmath>
-#include "Nodes.h"
-#include "Edges.h"
+#include "Nodes.hpp"
+#include "Edges.hpp"
 
 using namespace std;
 
@@ -39,6 +39,10 @@ class Graph {
         string dfs(string from, string to);
         string bfs(string from, string to);
         string dijkstra(string from, string to);
+        string dijkstra(vector<string> from, vector<string> to);
+        string dijkstra(vector<string> from, string to);
+        string dijkstra(string from, vector<string> to);
+
 };
 
 

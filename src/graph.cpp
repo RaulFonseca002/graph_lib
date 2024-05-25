@@ -1,4 +1,4 @@
-#include "graph.h"
+#include "graph.hpp"
 #include "utils.cpp"
 Graph::Graph() {
     directed = false;
@@ -113,18 +113,25 @@ node_t Graph::getNode(string nodeName){
 
 string Graph::getPath(string from, string to){
 
-    string resp = to + ">-";
-    string cameFrom = getNode(to).cameFrom;
-    
-    while (cameFrom.compare(from) != 0)
-    {
-        resp += cameFrom + ">-";
-        cameFrom = getNode(cameFrom).cameFrom;
+    string resp = from + "->";
 
+    stack<string> path;
+    string cameFrom = getNode(to).cameFrom;
+
+    path.push(to);
+
+    
+    while ((cameFrom.compare(from) != 0) || (cameFrom.compare("") == 0))
+    {
+        path.push(cameFrom);
+        cameFrom = getNode(cameFrom).cameFrom;
     }
 
-    resp += from;
-    reverseStr(resp);
-    return resp;
+    while(!path.empty()){
+        resp += path.top() + "->";
+        path.pop();
+    }
+
+    return resp.substr(0,(resp.length()-2));
 
 }

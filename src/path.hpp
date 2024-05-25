@@ -1,5 +1,5 @@
-#ifndef PATH_H
-#define PATH_H
+#ifndef PATH_HPP
+#define PATH_HPP
 
 #include <string>
 #include <vector>
@@ -20,7 +20,6 @@ struct pathingNode {
 string dfs(string from, string to);
 string bfs(string from, string to);
 string dijkstra(string from, string to);
-
 
 
 #endif 
